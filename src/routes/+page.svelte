@@ -1,1 +1,1 @@
-<button class="btn">Hello daisyUI</button>
+<button class="btn bg-primary">Hello daisyUI</button>
