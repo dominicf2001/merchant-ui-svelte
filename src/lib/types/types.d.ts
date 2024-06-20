@@ -1,6 +1,6 @@
 interface IStockEntry {
     price: number;
-    date: string;
+    date: number;
 }
 
 interface IStock {
