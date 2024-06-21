@@ -1,7 +1,16 @@
 <script lang="ts">
     import { scaleTime } from "d3-scale";
     import { DateTime } from "luxon";
-    import { Chart, Area, Axis, Svg, LinearGradient } from "layerchart";
+    import {
+        Chart,
+        Area,
+        Axis,
+        Svg,
+        LinearGradient,
+        Highlight,
+        Tooltip,
+        TooltipItem,
+    } from "layerchart";
 
     function maxPrice(history: IStockEntry[]) {
         let max = history[0]?.price ?? 0;
@@ -12,6 +21,9 @@
     }
 
     const { data } = $props();
+
+    const dateFormat =
+        data.range == "day" || data.range == "month" ? "L/d" : "h:mm";
 </script>
 
 <div
@@ -54,7 +66,7 @@
                             placement="bottom"
                             ticks={6}
                             format={(d) =>
-                                DateTime.fromJSDate(d).toFormat("h:mm")}
+                                DateTime.fromJSDate(d).toFormat(dateFormat)}
                             rule={{ class: "stroke-white opacity-25" }}
                             tickLabelProps={{
                                 class: "fill-white text-md opacity-50",
@@ -69,8 +81,16 @@
                                 line={{ class: "stroke-2 stroke-success" }}
                                 fill={url}
                             />
+                            <Highlight points lines />
                         </LinearGradient>
                     </Svg>
+                    <Tooltip
+                        header={(d) =>
+                            DateTime.fromMillis(d.date).toFormat(dateFormat)}
+                        let:data
+                    >
+                        <TooltipItem label="price" value={data.price} />
+                    </Tooltip>
                 </Chart>
                 <div class="card-body">
                     <h5 class="card-title">{stock.name}</h5>

@@ -7,3 +7,5 @@ interface IStock {
     name: string;
     history: IStockEntry[];
 }
+
+type StockInterval = "now" | "hour" | "day" | "month";
