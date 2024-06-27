@@ -4,7 +4,7 @@
     const { children } = $props();
 </script>
 
-<main class="flex justify-center">
+<main>
     {@render children()}
 </main>
 

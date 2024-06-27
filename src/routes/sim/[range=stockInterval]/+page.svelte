@@ -26,11 +26,9 @@
         data.range == "day" || data.range == "month" ? "L/d" : "h:mm";
 </script>
 
-<div
-    class="mt-60 mb-60 grid xl:grid-cols-3 lg:grid-cols-2 gap-8 xl:gap-14 2xl:gap-20"
->
+<div class="grid xl:grid-cols-3 lg:grid-cols-2 gap-8 xl:gap-14 2xl:gap-20">
     {#await data.stocks}
-        {#each new Array(10) as _}
+        {#each new Array(10) as _, index (index)}
             <div
                 class="card stock-card skeleton bg-opacity-50 gap-10 items-center flex flex-col"
             >
@@ -42,7 +40,7 @@
         {/each}
     {:then stocks}
         {#each stocks ?? [] as stock (stock.name)}
-            <div class="card stock-card bg-accent shadow-xl hover:shadow-2xl">
+            <div class="card stock-card shadow-xl hover:shadow-2xl">
                 <Chart
                     data={stock.history}
                     x="date"
@@ -103,7 +101,7 @@
 <style>
     .stock-card {
         padding: 1.5rem;
-        width: 450px;
-        height: 450px;
+        width: 400px;
+        height: 400px;
     }
 </style>
